@@ -75,4 +75,9 @@ public class Athlete implements Participant {
         res += 59 * this.pays.hashCode();
         return res;
     }
+
+    @Override
+    public String toString() {
+        return this.prenom + " " + this.nom + " " +this.getPays().getNom();
+    }
 }

@@ -17,6 +17,10 @@ public class Pays {
         this.listeAthlete = new ArrayList<>();
         this.nom = nom;
     }
+
+    public String getNom() {
+        return this.nom;
+    }
     
     public void ajouterAthlete(Athlete athlete) {
         if (athlete.getPays().equals(this.nom) && !listeAthlete.contains(athlete)) {
