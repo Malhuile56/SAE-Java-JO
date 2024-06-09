@@ -4,21 +4,22 @@ public abstract class Sport {
 
     public Sport(String nom) {
         this.nom = nom;
-        if (nom == "natation") {
-            this.nbAthletes = 4;
-        }
-        if (nom == "athletisme") {
-            this.nbAthletes = 4;
-        }
-        if (nom == "volleyball") {
-            this.nbAthletes = 6;
-        }
-        if (nom == "handball") {
-            this.nbAthletes = 7;
-        }
-        else {
-            System.err.println("erreur lors de la saisie du sport");
-        }
+
+        switch (nom) {
+            case "natation":
+            case "athletisme":
+                this.nbAthletes = 4;
+                break;
+            case "volleyball":
+                this.nbAthletes = 6;
+                break;
+            case "handball":
+                this.nbAthletes = 7;
+                break;
+            default:
+                System.err.println("erreur lors de la saisie du sport");
+                break;
+}
     }
 
     public String getNom() {

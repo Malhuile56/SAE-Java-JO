@@ -8,51 +8,27 @@ import java.util.Map;
 public class Executable {
     public static void main(String[] args) {
         // Sports
-        Sport natation = new Sport("Natation") {};
-        Sport escrime = new Sport("Escrime") {};
-        Sport volleyBall = new Sport("Volley-Ball") {};
-        Sport handball = new Sport("Handball") {};
-        Sport athletisme = new Sport("Athlétisme") {};
+        Natation natation = new Natation();
+        // Sport escrime = new Sport("Escrime") {};
+        // Sport volleyBall = new Sport("Volley-Ball") {};
+        // Sport handball = new Sport("Handball") {};
+        // Sport athletisme = new Sport("Athlétisme") {};
 
         // Pays
-        Map<String, Pays> dicoPays = new HashMap<>();
-        dicoPays.put("Maroc", new Pays("Maroc"));
-        dicoPays.put("USA", new Pays("USA"));
-        dicoPays.put("France", new Pays("France"));
-        dicoPays.put("Allemagne", new Pays("Allemagne"));
-        dicoPays.put("Kenya", new Pays("Kenya"));
+        Pays france = new Pays("France");
+        Pays usa = new Pays("USA");
+
 
         // Athletes
-        Athlete saito = new Athlete(natation, dicoPays.get("Maroc"), "Saito", "Haruto", "F", 13, 13, 7);
-        Athlete roux = new Athlete(natation, dicoPays.get("USA"), "Roux", "Raphaël", "F", 17, 15, 20);
-        Athlete huang = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yan", "M", 19, 16, 11);
-        Athlete huang2 = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yann", "M", 19, 16, 11);
+        Athlete saito = new Athlete(natation, france, "Saito", "Haruto", "F", 13, 13, 7);
+        Athlete roux = new Athlete(natation, france, "Roux", "Raphaël", "F", 17, 15, 20);
+        Athlete huang = new Athlete(natation, france, "Huang", "Yan", "M", 19, 16, 11);
+        Athlete huang2 = new Athlete(natation, france, "Huang", "Yann", "M", 19, 16, 11);
 
-        Athlete huang3 = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yan", "M", 19, 16, 1);
-        Athlete huang4 = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yan", "M", 19, 16, 51);
-        Athlete huang5 = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yan", "M", 19, 16, 25252);
-        Athlete huang6 = new Athlete(natation, dicoPays.get("USA"), "Huang", "Yan", "M", 19, 16, 10);
-
-
-        Athlete schneider = new Athlete(escrime, dicoPays.get("France"), "Schneider", "Lena", "M", 11, 14, 5);
-        Athlete hasegawa = new Athlete(volleyBall, dicoPays.get("Allemagne"), "Hasegawa", "Takumi", "M", 10, 13, 12);
-        Athlete suzuki = new Athlete(handball, dicoPays.get("Kenya"), "Suzuki", "Rin", "M", 15, 6, 18);
-        Athlete faure = new Athlete(athletisme, dicoPays.get("Allemagne"), "Faure", "Léa", "M", 20, 2, 17);
-        
-        // Natation
-        // List<Athlete> listnatation = new ArrayList<>();
-        // listnatation.add(saito);
-        // listnatation.add(roux);
-        // listnatation.add(huang);
-        // listnatation.add(huang2);
-        // Natation n = new Natation(listnatation);
-        // System.out.println(n);
-        // System.out.println("Classement des Athlètes:");
-        // Collections.sort(listnatation);
-        // System.out.println(listnatation);
-
-        // CompetitionIndividuelle natation100brasse = new CompetitionIndividuelle("Natation 100m brasse", new Natation(listnatation), "M");
-        // System.out.println(natation100brasse);
+        Athlete huang3 = new Athlete(natation, usa, "Huang", "Yan", "M", 19, 16, 90);
+        Athlete huang4 = new Athlete(natation, usa, "Huang", "Yan", "M", 19, 16, 18);
+        Athlete huang5 = new Athlete(natation, usa, "Huang", "Yan", "M", 19, 16, 17);
+        Athlete huang6 = new Athlete(natation, usa, "Huang", "Yan", "M", 19, 16, 22);
 
         // Natation
         Natation n = new Natation();
@@ -68,13 +44,13 @@ public class Executable {
 
 
         CompetitionCollective competnatationcoll = new CompetitionCollective("Natation relais libre", n, "M");
-        Equipe equipe1 = new Equipe("equipe1");
+        Equipe equipe1 = new Equipe("equipe1", france);
         equipe1.ajouterAthlete(saito);
         equipe1.ajouterAthlete(roux);
         equipe1.ajouterAthlete(huang);
         equipe1.ajouterAthlete(huang2);
 
-        Equipe equipe2 = new Equipe("equipe2");
+        Equipe equipe2 = new Equipe("equipe2", usa);
         equipe2.ajouterAthlete(huang3);
         equipe2.ajouterAthlete(huang4);
         equipe2.ajouterAthlete(huang5);
@@ -86,6 +62,15 @@ public class Executable {
         System.out.println("Classement des équipes :");
         competnatationcoll.start(competnatationcoll.getEquipesParticipantes(), n);
         System.out.println(competnatationcoll);
+
+        // JO
+        JeuxOlympiques joTokyo = new JeuxOlympiques();
+        joTokyo.ajouterPays(france);
+        joTokyo.ajouterPays(usa);
+        joTokyo.ajouterEpreuve(competnatationcoll);
+        joTokyo.ajouterEpreuve(competnatationind);
+
+        System.out.println((joTokyo.classementPays()));
 
     }
 }

@@ -20,8 +20,20 @@ public class CompetitionIndividuelle extends Epreuve {
         }
         else {
             Collections.sort(listeAthleteParticipants);
+            for (int i = 0 ; i < listeAthleteParticipants.size() ; i++) {
+                if (i == 0) {
+                    listeAthleteParticipants.get(i).getPays().ajouterOr();
+                }
 
-        }  
+                if (i == 1) {
+                    listeAthleteParticipants.get(i).getPays().ajouterArgent();
+                }
+
+                if (i == 2) {
+                    listeAthleteParticipants.get(i).getPays().ajouterBronze();
+                }
+            }
+        }
     }
 
 

@@ -4,15 +4,23 @@ import java.util.List;
 public class Equipe implements Participant, Comparable<Equipe> {
     private String nom;
     private List<Athlete> listeAthlete;
+    private Pays pays;
 
-    public Equipe(String nom, List<Athlete> liste) {
+    public Equipe(String nom, List<Athlete> liste, Pays pays) {
         this.nom = nom;
         this.listeAthlete = liste;
+        this.pays = pays;
     }
 
-    public Equipe(String nom) {
+    public Equipe(String nom, Pays pays) {
         this.nom = nom;
         this.listeAthlete = new ArrayList<>();
+        this.pays = pays;
+    }
+
+
+    public Pays getPays() {
+        return this.pays;
     }
 
     public String getNom() {
@@ -24,7 +32,9 @@ public class Equipe implements Participant, Comparable<Equipe> {
     }
     
     public void ajouterAthlete(Athlete athlete) {
-        this.listeAthlete.add(athlete);
+        if (this.pays.equals(athlete.getPays()) && !listeAthlete.contains(athlete)) {
+            listeAthlete.add(athlete);
+        }
     }
 
     @Override

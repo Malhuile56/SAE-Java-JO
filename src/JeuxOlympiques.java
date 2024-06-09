@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class JeuxOlympiques {
@@ -22,5 +23,9 @@ public class JeuxOlympiques {
         }
     }
 
-    
+    public List<Pays> classementPays() {
+        List<Pays> lp = new ArrayList<>(listePaysParticipants);
+        Collections.sort(lp);
+        return lp;
+    }
 }

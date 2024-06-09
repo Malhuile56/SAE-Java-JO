@@ -22,6 +22,18 @@ public class CompetitionCollective extends Epreuve {
         }
         else {
             Collections.sort(listeEquipesParticipantes);
+            for (int i = 0 ; i < listeEquipesParticipantes.size() ; i++) {
+                if (i == 0) {
+                    listeEquipesParticipantes.get(i).getPays().ajouterOr();
+                }
+                if (i == 1) {
+                    listeEquipesParticipantes.get(i).getPays().ajouterArgent();
+                }
+                if (i == 2) {
+                    listeEquipesParticipantes.get(i).getPays().ajouterBronze();
+                }
+                
+            }
         }  
     }
 
