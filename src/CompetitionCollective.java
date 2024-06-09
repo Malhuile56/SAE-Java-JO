@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CompetitionCollective extends Epreuve {
@@ -13,5 +14,22 @@ public class CompetitionCollective extends Epreuve {
         if (!this.listeEquipesParticipantes.contains(equipe)) {
             this.listeEquipesParticipantes.add(equipe);
         }
+    }
+
+    public void start(List<Equipe> listeEquipesParticipantes, Sport sport) {
+        if(listeEquipesParticipantes.size() != sport.getNbAthletes()) {
+            System.err.println("Nombre de participants invalide");
+        }
+        else {
+            Collections.sort(listeEquipesParticipantes);
+        }  
+    }
+
+    public List<Equipe> getEquipesParticipantes() {
+        return this.listeEquipesParticipantes;
+    }
+
+    public String toString() {
+        return this.getNom() + " : [listeEquipesParticipants=" + listeEquipesParticipantes;
     }
 }

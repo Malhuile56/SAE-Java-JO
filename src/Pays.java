@@ -23,7 +23,7 @@ public class Pays {
     }
     
     public void ajouterAthlete(Athlete athlete) {
-        if (athlete.getPays().equals(this.nom) && !listeAthlete.contains(athlete)) {
+        if (athlete.getPays().equals(this) && !listeAthlete.contains(athlete)) {
             this.listeAthlete.add(athlete);
         }
     }

@@ -1,4 +1,4 @@
-public class Athlete implements Participant {
+public class Athlete implements Participant, Comparable<Athlete> {
     private Sport sport;
     private Pays pays;
     private String nom;
@@ -51,6 +51,10 @@ public class Athlete implements Participant {
         return this.force;
     }
 
+    public int statsAthlete() {
+        return (this.getAgilite() + this.getEndurance() + this.getForce())/3;
+    }
+
     @Override
     public void partitiper() {
         // finir
@@ -78,6 +82,11 @@ public class Athlete implements Participant {
 
     @Override
     public String toString() {
-        return this.prenom + " " + this.nom + " " +this.getPays().getNom();
+        return this.prenom + " " + this.nom + " " +this.getPays().getNom() + " " + this.statsAthlete();
+    }
+
+    @Override
+    public int compareTo(Athlete other) {
+        return other.statsAthlete() - this.statsAthlete();
     }
 }
