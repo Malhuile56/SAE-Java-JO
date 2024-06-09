@@ -17,7 +17,7 @@ public class CompetitionCollective extends Epreuve {
     }
 
     public void start(List<Equipe> listeEquipesParticipantes, Sport sport) {
-        if(listeEquipesParticipantes.size() != sport.getNbAthletes()) {
+        if(listeEquipesParticipantes.size() <= 1) {
             System.err.println("Nombre de participants invalide");
         }
         else {
@@ -30,6 +30,6 @@ public class CompetitionCollective extends Epreuve {
     }
 
     public String toString() {
-        return this.getNom() + " : [listeEquipesParticipants=" + listeEquipesParticipantes;
+        return this.getNom() + " : [listeEquipesParticipants = " + listeEquipesParticipantes + "]";
     }
 }

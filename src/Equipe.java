@@ -45,7 +45,7 @@ public class Equipe implements Participant, Comparable<Equipe> {
 
     @Override
     public int compareTo(Equipe other) {
-        return Integer.compare(other.statsEquipe(), this.statsEquipe()); // Tri décroissant
+        return other.statsEquipe() - this.statsEquipe();
     }
 
     @Override

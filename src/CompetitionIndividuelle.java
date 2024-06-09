@@ -26,7 +26,7 @@ public class CompetitionIndividuelle extends Epreuve {
 
 
     public String toString() {
-        return this.getNom() + " : [listeParticipants=" + listeAthleteParticipants;
+        return this.getNom() + " : [listeParticipants = " + listeAthleteParticipants + "]";
     }
 
     public List<Athlete> getListeAthleteParticipants() {
