@@ -17,8 +17,7 @@ public class Equipe implements Participant, Comparable<Equipe> {
         this.listeAthlete = new ArrayList<>();
         this.pays = pays;
     }
-
-
+    
     public Pays getPays() {
         return this.pays;
     }

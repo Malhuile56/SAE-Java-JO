@@ -5,6 +5,7 @@ import java.util.List;
 public class JeuxOlympiques {
     private List<Pays> listePaysParticipants;
     private List<Epreuve> listeEpreuves;
+    private List<Athlete> listeAthletes;
 
     public JeuxOlympiques() {
         this.listePaysParticipants = new ArrayList<>();
@@ -23,9 +24,30 @@ public class JeuxOlympiques {
         }
     }
 
+    public void ajouterAthlete(Athlete athlete) {
+        if (!listeAthletes.contains(athlete)) {
+            this.listeAthletes.add(athlete);
+        }
+    }
+
     public List<Pays> classementPays() {
         List<Pays> lp = new ArrayList<>(listePaysParticipants);
         Collections.sort(lp);
         return lp;
     }
+
+    
+
+    public List<Pays> getListePaysParticipants() {
+        return listePaysParticipants;
+    }
+
+    public List<Epreuve> getListeEpreuves() {
+        return listeEpreuves;
+    }
+
+    public List<Athlete> getListeAthletes() {
+        return listeAthletes;
+    }
+    
 }

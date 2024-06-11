@@ -76,21 +76,39 @@ public class Executable {
 
         // System.out.println((joTokyo.classementPays()));
 
+        // JO
+        JeuxOlympiques joParis2024 = new JeuxOlympiques();
 
 
-        String fileName = "donnees.csv"; // Remplacez par le chemin de votre fichier CSV
+        // Charger données csv
+        String fileName = "donnees.csv";
         String line = " ";
 
-
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
+            List<Epreuve> listeEpreuves = new ArrayList<>();
+            List<Equipe> listeEquipes = new ArrayList<>();
+
             br.readLine();
-            List<Athlete> listeAthletes = new ArrayList<>();
+
             while((line = br.readLine()) != null) {
                 String[] splitedString = line.split(",");
                 Pays p = Pays.factory(splitedString[3]);
                 Sport sp = Sport.factory(splitedString[4].split(" ")[0]);
+                String epreuve = splitedString[4];
+
+                // création des compétitions
+                if (epreuve.contains("relais") || epreuve.toUpperCase().contains("ball".toUpperCase())) {
+                    CompetitionCollective competitionCollective = new CompetitionCollective(splitedString[4], sp, splitedString[2]);
+                    joParis2024.ajouterEpreuve(competitionCollective);
+                } else {
+                    CompetitionIndividuelle competitionIndividuelle = new CompetitionIndividuelle(splitedString[4], sp, splitedString[2]);
+                    joParis2024.ajouterEpreuve(competitionIndividuelle);
+                }
+
+                // création des athlètes
                 Athlete athlete = new Athlete(splitedString[0], splitedString[1], splitedString[2], p, sp, Integer.parseInt(splitedString[5]), Integer.parseInt(splitedString[6]), Integer.parseInt(splitedString[7]));
-                listeAthletes.add(athlete);
+                joParis2024.ajouterAthlete(athlete);
             }
             
 
