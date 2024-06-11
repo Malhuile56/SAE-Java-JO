@@ -7,15 +7,21 @@ public class Pays implements Comparable<Pays> {
     private int nbOr = 0;
     private int nbArgent = 0;
     private int nbBronze = 0;
+    protected static List<Pays> lesPays = new ArrayList<>();
 
-    public Pays(List<Athlete> list, String nom) {
-        this.listeAthlete = list;
-        this.nom = nom;
+
+    public static Pays factory(String nom) {
+        for (Pays p : Pays.lesPays) {
+            if (p.getNom().equals(nom)) {return p;}
+        }
+        Pays p = new Pays(nom);
+        return p;
     }
 
-    public Pays(String nom) {
+    private Pays(String nom) {
         this.listeAthlete = new ArrayList<>();
         this.nom = nom;
+        Pays.lesPays.add(this);
     }
 
     public String getNom() {

@@ -1,6 +1,6 @@
-// public class Escrime extends Sport {
+public class Escrime extends Sport {
 
-//     public Escrime() {
-        
-//     }
-// }
+    public Escrime(int nbJoueursMax) {
+        super(Sport.SportName.ESCRIME.getDisplayName(), nbJoueursMax);
+    }
+}

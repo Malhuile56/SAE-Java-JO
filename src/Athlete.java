@@ -8,7 +8,7 @@ public class Athlete implements Participant, Comparable<Athlete> {
     private int agilite;
     private int force;
 
-    public Athlete(Sport sport, Pays pays, String nom, String prenom, String sexe, int endurance, int agilite, int force) {
+    public Athlete(String nom, String prenom, String sexe, Pays pays, Sport sport, int force, int endurance, int agilite) {
         this.sport = sport;
         this.pays = pays;
         this.nom = nom;
@@ -82,7 +82,7 @@ public class Athlete implements Participant, Comparable<Athlete> {
 
     @Override
     public String toString() {
-        return this.prenom + " " + this.nom + " " +this.getPays().getNom() + " " + this.statsAthlete();
+        return this.prenom + " " + this.nom + " " +this.getPays().getNom() + " " + this.statsAthlete() + " " + this.getSport().getNom();
     }
 
     @Override
