@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Epreuve {
     private String nom;
     private Sport sport;
@@ -19,6 +22,43 @@ public abstract class Epreuve {
 
     public String getSexe() {
         return this.sexe;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+        result = prime * result + ((sport == null) ? 0 : sport.hashCode());
+        result = prime * result + ((sexe == null) ? 0 : sexe.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Epreuve other = (Epreuve) obj;
+        if (nom == null) {
+            if (other.nom != null)
+                return false;
+        } else if (!nom.equals(other.nom))
+            return false;
+        if (sport == null) {
+            if (other.sport != null)
+                return false;
+        } else if (!sport.equals(other.sport))
+            return false;
+        if (sexe == null) {
+            if (other.sexe != null)
+                return false;
+        } else if (!sexe.equals(other.sexe))
+            return false;
+        return true;
     }
 
     

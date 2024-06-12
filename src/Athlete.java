@@ -61,28 +61,57 @@ public class Athlete implements Participant, Comparable<Athlete> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {return true;}
-        if (o == null || !(o instanceof Athlete)) {return false;}
-        Athlete athlete = (Athlete) o;
-        if (!this.nom.equals(athlete.getNom())) {return false;}
-        if (!this.prenom.equals(athlete.getPrenom())) {return false;}
-        if (!this.sexe.equals(athlete.getSexe())) {return false;}
-        return this.pays.equals(athlete.getPays());
+    public String toString() {
+        return this.prenom + " " + this.nom + " " +this.getPays().getNom() + " " + this.statsAthlete() + " " + this.getSport().getNom();
     }
 
     @Override
     public int hashCode() {
-        int res = this.nom.hashCode();
-        res += 59 * this.prenom.hashCode();
-        res += 59 * this.sexe.hashCode();
-        res += 59 * this.pays.hashCode();
-        return res;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((sport == null) ? 0 : sport.hashCode());
+        result = prime * result + ((pays == null) ? 0 : pays.hashCode());
+        result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+        result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+        result = prime * result + ((sexe == null) ? 0 : sexe.hashCode());
+        return result;
     }
 
     @Override
-    public String toString() {
-        return this.prenom + " " + this.nom + " " +this.getPays().getNom() + " " + this.statsAthlete() + " " + this.getSport().getNom();
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Athlete other = (Athlete) obj;
+        if (sport == null) {
+            if (other.sport != null)
+                return false;
+        } else if (!sport.equals(other.sport))
+            return false;
+        if (pays == null) {
+            if (other.pays != null)
+                return false;
+        } else if (!pays.equals(other.pays))
+            return false;
+        if (nom == null) {
+            if (other.nom != null)
+                return false;
+        } else if (!nom.equals(other.nom))
+            return false;
+        if (prenom == null) {
+            if (other.prenom != null)
+                return false;
+        } else if (!prenom.equals(other.prenom))
+            return false;
+        if (sexe == null) {
+            if (other.sexe != null)
+                return false;
+        } else if (!sexe.equals(other.sexe))
+            return false;
+        return true;
     }
 
     @Override

@@ -10,6 +10,7 @@ public class JeuxOlympiques {
     public JeuxOlympiques() {
         this.listePaysParticipants = new ArrayList<>();
         this.listeEpreuves = new ArrayList<>();
+        this.listeAthletes = new ArrayList<>();
     }
 
     public void ajouterPays(Pays pays) {
@@ -26,17 +27,15 @@ public class JeuxOlympiques {
 
     public void ajouterAthlete(Athlete athlete) {
         if (!listeAthletes.contains(athlete)) {
-            this.listeAthletes.add(athlete);
+            listeAthletes.add(athlete);
         }
     }
 
-    public List<Pays> classementPays() {
+    public List<Pays> classementPays() { // classement par ordre décroissant
         List<Pays> lp = new ArrayList<>(listePaysParticipants);
         Collections.sort(lp);
         return lp;
     }
-
-    
 
     public List<Pays> getListePaysParticipants() {
         return listePaysParticipants;

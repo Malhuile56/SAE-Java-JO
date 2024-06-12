@@ -9,7 +9,6 @@ public class Pays implements Comparable<Pays> {
     private int nbBronze = 0;
     protected static List<Pays> lesPays = new ArrayList<>();
 
-
     public static Pays factory(String nom) {
         for (Pays p : Pays.lesPays) {
             if (p.getNom().equals(nom)) {return p;}
@@ -66,7 +65,7 @@ public class Pays implements Comparable<Pays> {
 
     @Override
     public String toString() {
-        return "Pays [nom = " + nom + ", nbMedailles = " + this.nbMedaillesTot() + "]";
+        return "Pays [nom = " + nom + ", nbMedailles = " + this.nbMedaillesTot() + "]\n";
     }
 
     @Override

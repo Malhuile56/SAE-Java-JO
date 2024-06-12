@@ -17,10 +17,10 @@ public class CompetitionCollective extends Epreuve {
     }
 
     public void start(List<Equipe> listeEquipesParticipantes, Sport sport) {
-        if(listeEquipesParticipantes.size() <= 1) {
-            System.err.println("Nombre de participants invalide");
-        }
-        else {
+        // if(listeEquipesParticipantes.size() <= 1) {
+        //     System.err.println("Nombre de participants invalide");
+        // }
+        // else {
             Collections.sort(listeEquipesParticipantes);
             for (int i = 0 ; i < listeEquipesParticipantes.size() ; i++) {
                 if (i == 0) {
@@ -34,7 +34,7 @@ public class CompetitionCollective extends Epreuve {
                 }
                 
             }
-        }  
+        // }  
     }
 
     public List<Equipe> getEquipesParticipantes() {

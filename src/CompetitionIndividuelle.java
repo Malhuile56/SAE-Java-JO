@@ -15,10 +15,10 @@ public class CompetitionIndividuelle extends Epreuve {
     }
 
     public void start(List<Athlete> listeAthleteParticipants, Sport sport) {
-        if(listeAthleteParticipants.size() != sport.getNbAthletes()) {
-            System.err.println("Nombre de participants invalide");
-        }
-        else {
+        // if(listeAthleteParticipants.size() != sport.getNbAthletes()) {
+        //     System.err.println("Nombre de participants invalide");
+        // }
+        // else {
             Collections.sort(listeAthleteParticipants);
             for (int i = 0 ; i < listeAthleteParticipants.size() ; i++) {
                 if (i == 0) {
@@ -33,7 +33,7 @@ public class CompetitionIndividuelle extends Epreuve {
                     listeAthleteParticipants.get(i).getPays().ajouterBronze();
                 }
             }
-        }
+        // }
     }
 
 
