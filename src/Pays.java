@@ -65,7 +65,7 @@ public class Pays implements Comparable<Pays> {
 
     @Override
     public String toString() {
-        return "Pays [nom = " + nom + ", nbMedailles = " + this.nbMedaillesTot() + "]\n";
+        return "[" + nom + " : Or = " + this.nbOr + ", Argent = " + this.nbArgent + ", Bronze = " + this.nbBronze + ", Nombre total de médailles = " + this.nbMedaillesTot() + "]\n";
     }
 
     @Override

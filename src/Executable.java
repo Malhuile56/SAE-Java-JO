@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Executable {
@@ -81,11 +83,14 @@ public class Executable {
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.readLine();
 
+            List<Equipe> listEq = new ArrayList<>();
+
             while((line = br.readLine()) != null) {
                 String[] splitedString = line.split(",");
                 Pays p = Pays.factory(splitedString[3]);
                 Sport sp = Sport.factory(splitedString[4].split(" ")[0]);
                 String epreuve = splitedString[4];
+
 
                 
 
@@ -98,6 +103,53 @@ public class Executable {
                 if (epreuve.contains("relais") || epreuve.toUpperCase().contains("ball".toUpperCase())) {
                     CompetitionCollective competitionCollective = new CompetitionCollective(splitedString[4], sp, splitedString[2]);
                     // joParis2024.ajouterEpreuve(competitionCollective);
+                    // for (Epreuve ep : joParis2024.getListeEpreuves()) {
+                    //     CompetitionCollective epc;
+                    //     String nomEquipe = "equipe" + athlete.getPays().getNom();
+                    //     Equipe ekip = new Equipe(nomEquipe, p);
+                    //     ekip.ajouterAthlete(athlete);
+                    //     listEq.add(ekip);
+                    //     if (ekip.getEquipe().get(0).getSport().getNom().equals(ep.getSport().getNom())) {
+                    //         epc = (CompetitionCollective) ep;
+                            
+                    //             if (ekip.getEquipe().size() == ekip.getEquipe().get(0).getSport().getNbAthletes()) {
+                    //                 epc.ajouterEquipe(ekip);
+                    //             }
+                    //     }
+                    // }
+
+                    // for (Pays pays : joParis2024.getListePaysParticipants()) {
+                    //     Equipe ekip = new Equipe("equipe" + p, p, sp);
+                    //     if (!listEq.contains(ekip)) {listEq.add(ekip);}
+                    // }
+
+                    // for (Equipe equipe : listEq) {
+                    //     if (equipe.getEquipe().isEmpty() && athlete.getPays().getNom().equals(equipe.getPays().getNom())) {
+                    //         equipe.ajouterAthlete(athlete);
+                    //     }
+                    //     else if (athlete.getPays().getNom().equals(equipe.getPays().getNom()) && equipe.getEquipe().size() < equipe.getSport().getNbAthletes()) {
+                    //         equipe.ajouterAthlete(athlete);
+                    //     }
+                    // }
+
+                    // for (Epreuve ep : joParis2024.getListeEpreuves()) {
+                    //     CompetitionCollective ecp;
+                    //     for (Equipe equipe : listEq) {
+                    //         if (equipe.getEquipe().get(0).getSport().getNom().equals(ecp.getSport().getNom())) {
+                    //             ekip = equipe;
+                    //             break;
+                    //         }
+                    //     }
+                    //     if (ekip.getEquipe().get(0).getSport().getNom().equals(ep.getSport().getNom())) {
+                    //                 epc = (CompetitionCollective) ep;
+                                    
+                    //                     if (ekip.getEquipe().size() == ekip.getEquipe().get(0).getSport().getNbAthletes()) {
+                    //                         epc.ajouterEquipe(ekip);
+                    //                     }
+                    //             }
+                        
+                    // }
+
                     
                 } else {
                     CompetitionIndividuelle competitionIndividuelle = new CompetitionIndividuelle(splitedString[4], sp, splitedString[2]);
@@ -105,7 +157,7 @@ public class Executable {
                     for (Epreuve ep : joParis2024.getListeEpreuves()) {
                         CompetitionIndividuelle epi;
                         if (athlete.getSport().getNom().equals(ep.getSport().getNom())) {
-                            epi = (CompetitionIndividuelle ) ep;
+                            epi = (CompetitionIndividuelle) ep;
                             epi.ajouterAthlete(athlete);
                         }
                     }
@@ -114,23 +166,16 @@ public class Executable {
 
             for (int i = 0 ; i < joParis2024.getListeEpreuves().size() ; i++) {
                 try {
-
                     CompetitionCollective actu = (CompetitionCollective) joParis2024.getListeEpreuves().get(i);
                     actu.start(actu.getEquipesParticipantes(), actu.getSport());
-
                 } catch (Exception e) {
-
                     CompetitionIndividuelle actu = (CompetitionIndividuelle) joParis2024.getListeEpreuves().get(i);
                     actu.start(actu.getListeAthleteParticipants(), actu.getSport());
-
                 }
             }
-
-
             System.out.println(joParis2024.classementPays());
-
         } catch(FileNotFoundException e) {
-            
+            new FileNotFoundException("Fichier non trouvé");
         }
 
 

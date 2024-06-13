@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Epreuve {
     private String nom;
     private Sport sport;
