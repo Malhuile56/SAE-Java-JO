@@ -32,7 +32,7 @@ public class CompetitionIndividuelle extends Epreuve {
         }
     }
 
-
+    @Override
     public String toString() {
         return this.getNom() + " : [listeParticipants = " + listeAthleteParticipants + "]";
     }
