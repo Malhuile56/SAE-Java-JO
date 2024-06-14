@@ -31,7 +31,7 @@ public class JeuxOlympiques {
         }
     }
 
-    public List<Pays> classementPays() { // classement par ordre décroissant
+    public List<Pays> classementPays() { // classement par ordre décroissant (du meilleur au pire)
         List<Pays> lp = new ArrayList<>(listePaysParticipants);
         Collections.sort(lp);
         return lp;

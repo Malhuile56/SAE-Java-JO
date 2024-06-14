@@ -8,6 +8,115 @@ import java.util.List;
 
 public class Executable {
     public static <CSVReader> void main(String[] args) throws IOException {
+
+        // JO
+        JeuxOlympiques joParis2024 = new JeuxOlympiques();
+
+        // Charger données csv
+        String fileName = "donnees.csv";
+        String line = " ";
+
+
+        List<Equipe> listEq = new ArrayList<>();
+        List<CompetitionIndividuelle> listecompind = new ArrayList<>();
+        List<CompetitionCollective> listecompcoll = new ArrayList<>();
+
+        // lecture du fichier csv
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            // ignore 1ere ligne
+            br.readLine();
+
+            // charge les données
+            while((line = br.readLine()) != null) {
+                String[] splitedString = line.split(",");
+                Pays p = Pays.factory(splitedString[3]);
+                Sport sp = Sport.factory(splitedString[4].split(" ")[0]);
+                String epreuve = splitedString[4];
+
+                // création des athlètes
+                Athlete athlete = new Athlete(splitedString[0], splitedString[1], splitedString[2], p, sp, Integer.parseInt(splitedString[5]), Integer.parseInt(splitedString[6]), Integer.parseInt(splitedString[7]));
+                joParis2024.ajouterAthlete(athlete);
+                joParis2024.ajouterPays(p);
+
+                // création des équipes
+                Equipe ekip = new Equipe("equipe" + p.getNom(), p, sp);
+                if (!listEq.contains(ekip)) {
+                    ekip.ajouterAthlete(athlete);
+                    listEq.add(ekip);
+                }
+                else {
+                    listEq.get(listEq.indexOf(ekip)).ajouterAthlete(athlete);
+                }
+                
+
+                // création des compétitions
+                if (epreuve.contains("relais") || epreuve.toUpperCase().contains("ball".toUpperCase())) {
+                    CompetitionCollective competitionCollective = new CompetitionCollective(splitedString[4], sp, splitedString[2]);
+                    if (!listecompcoll.contains(competitionCollective)) {listecompcoll.add(competitionCollective);}
+                } else {
+                    CompetitionIndividuelle competitionIndividuelle = new CompetitionIndividuelle(splitedString[4], sp, splitedString[2]);
+                    if (!listecompind.contains(competitionIndividuelle)) {listecompind.add(competitionIndividuelle);}
+                }
+            }
+
+            // ajout des équipes dans des épreuves collectives
+            for (Equipe ekip : listEq) {
+                for (CompetitionCollective compcoll : listecompcoll) {
+                    if (ekip.getSport().equals(compcoll.getSport())) {
+                        compcoll.ajouterEquipe(ekip);
+                    }
+                }
+            }
+
+            // ajout des équipes dans des épreuves individuelles
+            for (Athlete athlete : joParis2024.getListeAthletes()) {
+                for (CompetitionIndividuelle compind : listecompind) {
+                    if (athlete.getSport().equals(compind.getSport())) {
+                        compind.ajouterAthlete(athlete);
+                    }
+                }
+            }
+
+            // ajout des épreuves collectives aux JO
+            for (CompetitionCollective compcoll : listecompcoll) {
+                joParis2024.ajouterEpreuve(compcoll);
+            }
+
+            // ajout des épreuves individuelles aux JO
+            for (CompetitionIndividuelle compind : listecompind) {
+                joParis2024.ajouterEpreuve(compind);
+            }
+
+            // lancement compétition et attribution des médailles
+            for (int i = 0 ; i < joParis2024.getListeEpreuves().size() ; i++) {
+                try {
+                    CompetitionCollective actu = (CompetitionCollective) joParis2024.getListeEpreuves().get(i);
+                    actu.start(actu.getEquipesParticipantes(), actu.getSport());
+                } catch (Exception e) {
+                    CompetitionIndividuelle actu = (CompetitionIndividuelle) joParis2024.getListeEpreuves().get(i);
+                    actu.start(actu.getListeAthleteParticipants(), actu.getSport());
+                }
+            }
+
+            // affiche le classement des pays par nombre de médailles obtenues
+            System.out.println("\n============================ Classement des pays par nombre de médailles obtenues ============================\n");
+            System.out.println(joParis2024.classementPays());
+            System.out.println("\n==============================================================================================================\n");
+
+
+
+        } catch(FileNotFoundException e) {
+            new FileNotFoundException("Fichier non trouvé");
+        }
+
+
+
+
+
+
+
+
+
         // Sports
         // Natation natation = new Natation();
         // // Sport escrime = new Sport("Escrime") {};
@@ -72,113 +181,5 @@ public class Executable {
         // joTokyo.ajouterEpreuve(competnatationind);
 
         // System.out.println((joTokyo.classementPays()));
-
-        // JO
-        JeuxOlympiques joParis2024 = new JeuxOlympiques();
-
-        // Charger données csv
-        String fileName = "donnees.csv";
-        String line = " ";
-
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            br.readLine();
-
-            List<Equipe> listEq = new ArrayList<>();
-
-            while((line = br.readLine()) != null) {
-                String[] splitedString = line.split(",");
-                Pays p = Pays.factory(splitedString[3]);
-                Sport sp = Sport.factory(splitedString[4].split(" ")[0]);
-                String epreuve = splitedString[4];
-
-
-                
-
-                // création des athlètes
-                Athlete athlete = new Athlete(splitedString[0], splitedString[1], splitedString[2], p, sp, Integer.parseInt(splitedString[5]), Integer.parseInt(splitedString[6]), Integer.parseInt(splitedString[7]));
-                joParis2024.ajouterAthlete(athlete);
-                joParis2024.ajouterPays(p);
-
-                // création des compétitions
-                if (epreuve.contains("relais") || epreuve.toUpperCase().contains("ball".toUpperCase())) {
-                    CompetitionCollective competitionCollective = new CompetitionCollective(splitedString[4], sp, splitedString[2]);
-                    // joParis2024.ajouterEpreuve(competitionCollective);
-                    // for (Epreuve ep : joParis2024.getListeEpreuves()) {
-                    //     CompetitionCollective epc;
-                    //     String nomEquipe = "equipe" + athlete.getPays().getNom();
-                    //     Equipe ekip = new Equipe(nomEquipe, p);
-                    //     ekip.ajouterAthlete(athlete);
-                    //     listEq.add(ekip);
-                    //     if (ekip.getEquipe().get(0).getSport().getNom().equals(ep.getSport().getNom())) {
-                    //         epc = (CompetitionCollective) ep;
-                            
-                    //             if (ekip.getEquipe().size() == ekip.getEquipe().get(0).getSport().getNbAthletes()) {
-                    //                 epc.ajouterEquipe(ekip);
-                    //             }
-                    //     }
-                    // }
-
-                    // for (Pays pays : joParis2024.getListePaysParticipants()) {
-                    //     Equipe ekip = new Equipe("equipe" + p, p, sp);
-                    //     if (!listEq.contains(ekip)) {listEq.add(ekip);}
-                    // }
-
-                    // for (Equipe equipe : listEq) {
-                    //     if (equipe.getEquipe().isEmpty() && athlete.getPays().getNom().equals(equipe.getPays().getNom())) {
-                    //         equipe.ajouterAthlete(athlete);
-                    //     }
-                    //     else if (athlete.getPays().getNom().equals(equipe.getPays().getNom()) && equipe.getEquipe().size() < equipe.getSport().getNbAthletes()) {
-                    //         equipe.ajouterAthlete(athlete);
-                    //     }
-                    // }
-
-                    // for (Epreuve ep : joParis2024.getListeEpreuves()) {
-                    //     CompetitionCollective ecp;
-                    //     for (Equipe equipe : listEq) {
-                    //         if (equipe.getEquipe().get(0).getSport().getNom().equals(ecp.getSport().getNom())) {
-                    //             ekip = equipe;
-                    //             break;
-                    //         }
-                    //     }
-                    //     if (ekip.getEquipe().get(0).getSport().getNom().equals(ep.getSport().getNom())) {
-                    //                 epc = (CompetitionCollective) ep;
-                                    
-                    //                     if (ekip.getEquipe().size() == ekip.getEquipe().get(0).getSport().getNbAthletes()) {
-                    //                         epc.ajouterEquipe(ekip);
-                    //                     }
-                    //             }
-                        
-                    // }
-
-                    
-                } else {
-                    CompetitionIndividuelle competitionIndividuelle = new CompetitionIndividuelle(splitedString[4], sp, splitedString[2]);
-                    joParis2024.ajouterEpreuve(competitionIndividuelle);
-                    for (Epreuve ep : joParis2024.getListeEpreuves()) {
-                        CompetitionIndividuelle epi;
-                        if (athlete.getSport().getNom().equals(ep.getSport().getNom())) {
-                            epi = (CompetitionIndividuelle) ep;
-                            epi.ajouterAthlete(athlete);
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0 ; i < joParis2024.getListeEpreuves().size() ; i++) {
-                try {
-                    CompetitionCollective actu = (CompetitionCollective) joParis2024.getListeEpreuves().get(i);
-                    actu.start(actu.getEquipesParticipantes(), actu.getSport());
-                } catch (Exception e) {
-                    CompetitionIndividuelle actu = (CompetitionIndividuelle) joParis2024.getListeEpreuves().get(i);
-                    actu.start(actu.getListeAthleteParticipants(), actu.getSport());
-                }
-            }
-            System.out.println(joParis2024.classementPays());
-        } catch(FileNotFoundException e) {
-            new FileNotFoundException("Fichier non trouvé");
-        }
-
-
-
     }
 }

@@ -17,24 +17,20 @@ public class CompetitionCollective extends Epreuve {
     }
 
     public void start(List<Equipe> listeEquipesParticipantes, Sport sport) {
-        // if(listeEquipesParticipantes.size() <= 1) {
-        //     System.err.println("Nombre de participants invalide");
-        // }
-        // else {
-            Collections.sort(listeEquipesParticipantes);
-            for (int i = 0 ; i < listeEquipesParticipantes.size() ; i++) {
-                if (i == 0) {
-                    listeEquipesParticipantes.get(i).getPays().ajouterOr();
-                }
-                if (i == 1) {
-                    listeEquipesParticipantes.get(i).getPays().ajouterArgent();
-                }
-                if (i == 2) {
-                    listeEquipesParticipantes.get(i).getPays().ajouterBronze();
-                }
-                
+        Collections.sort(listeEquipesParticipantes);
+        for (int i = 0 ; i < listeEquipesParticipantes.size() ; i++) {
+            if (i == 0) {
+                listeEquipesParticipantes.get(i).getPays().ajouterOr();
+                System.out.println("L'équipe " + listeEquipesParticipantes.get(i).getNom() + " a gagné la compétition collective de " + this.getNom());
             }
-        // }  
+            if (i == 1) {
+                listeEquipesParticipantes.get(i).getPays().ajouterArgent();
+            }
+            if (i == 2) {
+                listeEquipesParticipantes.get(i).getPays().ajouterBronze();
+            }
+            
+        }
     }
 
     public List<Equipe> getEquipesParticipantes() {

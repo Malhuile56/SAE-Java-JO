@@ -42,9 +42,7 @@ public abstract class Epreuve {
         Epreuve other = (Epreuve) obj;
         if (nom == null) {
             if (other.nom != null)
-                return false;
-        } else if (!nom.equals(other.nom))
-            return false;
+                return false;}
         if (sport == null) {
             if (other.sport != null)
                 return false;
