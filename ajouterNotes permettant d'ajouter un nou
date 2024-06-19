@@ -1,0 +1,2 @@
+ajouterNotes permettant d'ajouter un nouveau devoir avec les notes obtenues
+à partir des informations du devoir et de la liste des notes obtenues par les étudiants. Si le devoirexiste déjà, la méthode doit supprimer toutes les notes de ce devoir
